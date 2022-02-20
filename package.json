@@ -1,0 +1,35 @@
+{
+  "name": "tydids-p2p-http",
+  "version": "0.5.1",
+  "description": "Tydids P2P HTTP(s) Relay and UI",
+  "main": "index.js",
+  "browser": "browser.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/energychain/tydids-p2p-http.git"
+  },
+  "keywords": [
+    "tydids",
+    "gun",
+    "decentralized",
+    "edge",
+    "p2p",
+    "microservice",
+    "identity"
+  ],
+  "author": "STROMDAO GmbH <dev@stromdao.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/energychain/tydids-p2p-http/issues"
+  },
+  "homepage": "https://github.com/energychain/tydids-p2p-http#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "gun": "^0.2020.1235",
+    "tydids-p2p": "^0.5.4"
+  }
+}
