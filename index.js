@@ -31,7 +31,7 @@ const gun = Gun({
 });
 
 const main = async function() {
-		const ssi = await tydids.ssi(privateKey,gun);
+
 
 		app.get('/.well-known/tydids.json', (req, res) => {
 			res.json(
@@ -39,6 +39,10 @@ const main = async function() {
 					peers:['/gun'],
 					identity:ssi.identity
 				});
+		})
+
+		app.get('/tydids/identity', async (req, res) => {
+			res.json(ssi.identity);
 		})
 
 		app.get('/tydids/retrieveVP', async (req, res) => {
@@ -52,6 +56,9 @@ const main = async function() {
 			console.log('\nApp listening on port', port);
 			console.log('Connect http://localhost:'+port+'/');
 		});
+
+		const ssi = await tydids.ssi(privateKey,gun);
+		console.log("Service SSI:",ssi.identity);
 }
 
 main();
