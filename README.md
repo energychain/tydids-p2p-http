@@ -10,3 +10,4 @@ Tydids P2P HTTP(s) Relay and UI
 [![CO2Offset](https://api.corrently.io/v2.0/ghgmanage/statusimg?host=tydids-p2p-http&svg=1)](https://co2offset.io/badge.html?host=tydids-p2p-http)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/energychain/tydids-p2p-http)
+[![Edit tydids-p2p-http](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/tydids-p2p-http-q987k0?fontsize=14&hidenavigation=1&theme=dark)
