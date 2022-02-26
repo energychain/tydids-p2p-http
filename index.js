@@ -32,7 +32,6 @@ const gun = Gun({
 
 const main = async function() {
 
-
 		app.get('/.well-known/tydids.json', (req, res) => {
 			res.json(
 				{
@@ -52,6 +51,19 @@ const main = async function() {
 			}
 		})
 
+		app.get('/tydids/setValue', async (req, res) => {
+			if(typeof req.query.address == 'undefined') {
+				req.query.address = settings.presentation.adddress;
+			}
+			if((typeof settings.setKey !== 'undefined') && (settings.setKey == req.query.setKey)) {
+				console.log('Update',req.query.address);
+				let did = await ssi.retrieveVP(req.query.address);
+				did[req.query.field] = req.query.value;
+				await ssi.updateVP(req.query.address,did);
+				res.json(did);
+			}
+		});
+
 		app.listen(port, function () {
 			console.log('\nApp listening on port', port);
 			console.log('Connect http://localhost:'+port+'/');
@@ -59,6 +71,13 @@ const main = async function() {
 
 		const ssi = await tydids.ssi(privateKey,gun);
 		console.log("Service SSI:",ssi.identity);
+		if(typeof settings.presentation == 'undefined') {
+			settings = JSON.parse(fs.readFileSync('./.tydids.json'));
+			console.log("Creating new Managed Presentation");
+			settings.presentation =  await ssi.createManagedPresentation();
+			fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
+		}
+		console.log('Managed Presentation',settings.presentation);
 }
 
 main();
