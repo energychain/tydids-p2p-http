@@ -46,7 +46,7 @@ const main = async function() {
 
 		app.get('/tydids/retrieveVP', async (req, res) => {
 			if(typeof req.query.address !== 'undefined') {
-				let did = await ssi.retrieveVP(req.query.address);
+				let did = await ssi.retrievePresentation(req.query.address);
 				res.json(did);
 			}
 		})
@@ -57,9 +57,9 @@ const main = async function() {
 			}
 			if((typeof settings.setKey !== 'undefined') && (settings.setKey == req.query.setKey)) {
 				console.log('Update',req.query.address);
-				let did = await ssi.retrieveVP(req.query.address);
+				let did = await ssi.retrievePresentation(req.query.address);
 				did[req.query.field] = req.query.value;
-				await ssi.updateVP(req.query.address,did);
+				await ssi.updatePresentation(req.query.address,did);
 				res.json(did);
 			}
 		});
@@ -74,7 +74,7 @@ const main = async function() {
 		if(typeof settings.presentation == 'undefined') {
 			settings = JSON.parse(fs.readFileSync('./.tydids.json'));
 			console.log("Creating new Managed Presentation");
-			settings.presentation =  await ssi.createManagedPresentation();
+			settings.presentation =  await ssi.createPresentation();
 			fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
 		}
 		console.log('Managed Presentation',settings.presentation);
