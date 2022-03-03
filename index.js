@@ -44,7 +44,7 @@ const main = async function() {
 			res.json(ssi.identity);
 		})
 
-		app.get('/tydids/retrieveVP', async (req, res) => {
+		app.get('/tydids/retrievePresentation', async (req, res) => {
 			if(typeof req.query.address !== 'undefined') {
 				let did = await ssi.retrievePresentation(req.query.address);
 				res.json(did);
@@ -72,12 +72,8 @@ const main = async function() {
 		const ssi = await tydids.ssi(privateKey,gun);
 		console.log("Service SSI:",ssi.identity);
 		if(typeof settings.presentation == 'undefined') {
-			settings = JSON.parse(fs.readFileSync('./.tydids.json'));
-			console.log("Creating new Managed Presentation");
-			settings.presentation =  await ssi.createPresentation();
 			fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
 		}
-		console.log('Managed Presentation',settings.presentation);
 }
 
 main();
