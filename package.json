@@ -1,6 +1,6 @@
 {
   "name": "tydids-p2p-http",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Tydids P2P HTTP(s) Relay and UI",
   "main": "index.js",
   "browser": "browser.js",
@@ -30,6 +30,6 @@
   "dependencies": {
     "express": "^4.17.2",
     "gun": "^0.2020.1235",
-    "tydids-p2p": "^0.9.7"
+    "tydids-p2p": "^0.9.9"
   }
 }
