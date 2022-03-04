@@ -46,8 +46,13 @@ const main = async function() {
 
 		app.get('/tydids/retrievePresentation', async (req, res) => {
 			if(typeof req.query.address !== 'undefined') {
-				let did = await ssi.retrievePresentation(req.query.address);
-				res.json(did);
+				if(typeof req.query.revision !== 'undefined') {
+					let did = await ssi.retrievePresentation(req.query.address,req.query.revision);
+					res.json(did);
+				} else {
+					let did = await ssi.retrievePresentation(req.query.address);
+					res.json(did);
+				}
 			}
 		})
 
