@@ -26,9 +26,6 @@ if(fs.existsSync('./.tydids.json')) {
 app.use(express.static('public'));
 
 
-
-
-
 const main = async function() {
 
 		app.get('/.well-known/tydids.json', (req, res) => {
