@@ -104,6 +104,6 @@ dist
 .tern-port
 
 # RAD space
-radata/*
-
+radata*
+data*
 .tydids.json

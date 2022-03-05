@@ -28,58 +28,8 @@ app.use(express.static('public'));
 
 const main = async function() {
 
-		app.get('/.well-known/tydids.json', (req, res) => {
-			res.json(
-				{
-					peers:['/gun'],
-					identity:ssi.identity
-				});
-		})
-
-		app.get('/tydids/identity', async (req, res) => {
-			res.json(ssi.identity);
-		})
-
-		app.get('/tydids/retrievePresentation', async (req, res) => {
-			if(typeof req.query.address !== 'undefined') {
-				if(typeof req.query.revision !== 'undefined') {
-					let did = await ssi.retrievePresentation(req.query.address,req.query.revision);
-					res.json(did);
-				} else {
-					let did = await ssi.retrievePresentation(req.query.address);
-					res.json(did);
-				}
-			}
-		})
-
-		app.get('/tydids/setValue', async (req, res) => {
-			if(typeof req.query.address == 'undefined') {
-				req.query.address = settings.presentation.adddress;
-			}
-			if((typeof settings.setKey !== 'undefined') && (settings.setKey == req.query.setKey)) {
-				console.log('Update',req.query.address);
-				let did = await ssi.retrievePresentation(req.query.address);
-				did[req.query.field] = req.query.value;
-				await ssi.updatePresentation(req.query.address,did);
-				res.json(did);
-			}
-		});
-		app.use(Gun.serve);
-
-		app.listen(port, function () {
-			console.log('\nApp listening on port', port);
-			console.log('Connect http://localhost:'+port+'/');
-		});
-		const gun = Gun({
-			web: app,
-			file: 'data',
-		});
-
-		const ssi = await tydids.ssi(privateKey,true,gun);
-		console.log("Service SSI:",ssi.identity);
-		if(typeof settings.presentation == 'undefined') {
-			fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
-		}
+	const server = require('http').createServer().listen(8888);
+	const gun = Gun({web: server});
 
 }
 
