@@ -25,16 +25,9 @@ if(fs.existsSync('./.tydids.json')) {
 // Serves up /index.html
 app.use(express.static('public'));
 
-/*
-const gun = Gun({
-	web: app, // Handles real-time requests and updates.
-  peers: ['https://webrtc.tydids.com/gun']
-});
-*/
 
-const gun = Gun({
-	web: app
-});
+
+
 
 const main = async function() {
 
@@ -75,10 +68,14 @@ const main = async function() {
 			}
 		});
 		app.use(Gun.serve);
-		
+
 		app.listen(port, function () {
 			console.log('\nApp listening on port', port);
 			console.log('Connect http://localhost:'+port+'/');
+		});
+		const gun = Gun({
+			web: app,
+			file: 'data',
 		});
 
 		const ssi = await tydids.ssi(privateKey,true,gun);
@@ -86,6 +83,7 @@ const main = async function() {
 		if(typeof settings.presentation == 'undefined') {
 			fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
 		}
+
 }
 
 main();
