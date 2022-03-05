@@ -74,7 +74,7 @@ const main = async function() {
 			console.log('Connect http://localhost:'+port+'/');
 		});
 
-		const ssi = await tydids.ssi(privateKey,gun);
+		const ssi = await tydids.ssi(privateKey,true);
 		console.log("Service SSI:",ssi.identity);
 		if(typeof settings.presentation == 'undefined') {
 			fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
