@@ -25,9 +25,15 @@ if(fs.existsSync('./.tydids.json')) {
 // Serves up /index.html
 app.use(express.static('public'));
 
+/*
 const gun = Gun({
 	web: app, // Handles real-time requests and updates.
   peers: ['https://webrtc.tydids.com/gun']
+});
+*/
+
+const gun = Gun({
+	web: app
 });
 
 const main = async function() {
