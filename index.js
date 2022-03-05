@@ -4,7 +4,7 @@ var Gun = require('gun');
 const express = require('express')
 const app = express();
 
-var port = process.env.PORT || 8899;
+var port = process.env.PORT || 8888;
 var fs = require('fs');
 const tydids = require("tydids-p2p");
 let _tmpwallet = tydids.ethers.Wallet.createRandom();
