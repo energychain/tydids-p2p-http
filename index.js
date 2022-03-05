@@ -74,7 +74,8 @@ const main = async function() {
 				res.json(did);
 			}
 		});
-
+		app.use(Gun.serve);
+		
 		app.listen(port, function () {
 			console.log('\nApp listening on port', port);
 			console.log('Connect http://localhost:'+port+'/');
