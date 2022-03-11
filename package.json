@@ -30,6 +30,6 @@
   "dependencies": {
     "express": "^4.17.2",
     "gun": "^0.2020.1235",
-    "tydids-p2p": "^0.9.14"
+    "tydids-p2p": "^1.0.4"
   }
 }
