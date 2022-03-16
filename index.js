@@ -9,4 +9,4 @@ const server = app.listen(port, () => {
     console.log("Listening at: http://localhost://" + port)
 })
 
-Gun({web: server})
+Gun({web: server,file:"radata_http_"+new Date().getTime()})
