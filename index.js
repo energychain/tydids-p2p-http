@@ -1,36 +1,12 @@
-'use strict';
-
-var Gun = require('gun');
 const express = require('express')
-const app = express();
+const Gun = require('gun')
 
-var port = process.env.PORT || 8888;
-var fs = require('fs');
-const tydids = require("tydids-p2p");
-let _tmpwallet = tydids.ethers.Wallet.createRandom();
-let privateKey = _tmpwallet.privateKey;
-let settings = {};
+const app = express()
+const port = 8888
+app.use(Gun.serve)
 
-if(fs.existsSync('./.tydids.json')) {
-	settings = JSON.parse(fs.readFileSync('./.tydids.json'));
-	if(typeof settings.privateKey !== 'undefined') privateKey = settings.privateKey;
-} else {
-	settings = {
-		address:_tmpwallet.address,
-		privateKey: privateKey
-	}
-	fs.writeFileSync('./.tydids.json',JSON.stringify(settings));
-}
+const server = app.listen(port, () => {
+    console.log("Listening at: http://localhost://" + port)
+})
 
-// Serves up /index.html
-app.use(express.static('public'));
-
-
-const main = async function() {
-
-	const server = require('http').createServer().listen(8888);
-	const gun = Gun({web: server});
-
-}
-
-main();
+Gun({web: server})
