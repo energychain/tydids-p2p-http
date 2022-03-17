@@ -12,6 +12,8 @@ const server = app.listen(port, () => {
 const gun = Gun({web: server,file:"radata_http_"+new Date().getTime()})
 gun.get("relay").on(function(relay) {
 	for (const [key, value] of Object.entries(relay)) {
+		if(key.length>20) {
   		gun.get(key).once(function(d) {},{wait:5000});
+		}
 	}
 });
