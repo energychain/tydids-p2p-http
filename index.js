@@ -9,4 +9,9 @@ const server = app.listen(port, () => {
     console.log("Listening at: http://localhost://" + port)
 })
 
-Gun({web: server,file:"radata_http_"+new Date().getTime()})
+const gun = Gun({web: server,file:"radata_http_"+new Date().getTime()})
+gun.get("relay").on(function(relay) {
+	for (const [key, value] of Object.entries(relay)) {
+  		gun.get(key).once(function(d) {},{wait:5000});
+	}
+});

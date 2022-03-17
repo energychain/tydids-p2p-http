@@ -1,0 +1,4 @@
+cmd: npm start
+targets:
+  deploy:
+    cmd: "./deyployment/corrently.sh"
