@@ -11,7 +11,14 @@ const server = app.listen(port, () => {
     console.log("Listening at: http://localhost:" + port)
 })
 
-const gun = Gun({web: server,file:"radata_http_"+new Date().getTime()})
+const peersRaw = ['http://relay.tydids.com:8888/','http://relay2.tydids.com:8888/','http://relay3.tydids.com:8888/','http://relay4.tydids.com:8888/'],
+
+let peers = [];
+for(let i=0;i<peersRaw.length;i++) {
+  peers.push(peersRaw[i]+'gun');
+}
+
+const gun = Gun({web: server,file:"radata_http_"+new Date().getTime(),peers:peers})
 const tydids = require("tydids-p2p");
 const wallet = tydids.ethers.Wallet.createRandom();
 const privateKey = wallet.privateKey;
