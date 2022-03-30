@@ -11,9 +11,10 @@ const server = app.listen(port, () => {
     console.log("Listening at: http://localhost:" + port)
 })
 
-const peersRaw = ['http://relay.tydids.com:8888/','http://relay2.tydids.com:8888/','http://relay3.tydids.com:8888/','http://relay4.tydids.com:8888/'];
+const peersRaw = ['http://relay2.tydids.com:8888/'];
 
 let peers = [];
+
 for(let i=0;i<peersRaw.length;i++) {
   peers.push(peersRaw[i]+'gun');
 }
